@@ -23,6 +23,12 @@ export const metadata: Metadata = {
   description: "Transform your books into interactive AI conversations. Upload PDFs, and chat with your books using voice.",
 };
 
+/**
+ * Application root layout that wraps the app with the authentication provider, global fonts, and the top navigation.
+ *
+ * @param children - The page or component tree to render inside the layout's body.
+ * @returns The root HTML structure containing the Navbar and the provided children.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
