@@ -377,7 +377,7 @@
     @apply mb-5 md:mb-9 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4;
   }
   .auth-footer {
-    @apply mt-10 text-center text-sm text-(--text-secondary) max-w-md;
+    @apply mt-10 text-center text-sm text-[var(--text-secondary)] max-w-md;
   }
 
   /* ===========================================

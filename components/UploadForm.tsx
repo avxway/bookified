@@ -34,11 +34,24 @@ const UploadForm = () => {
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setIsSubmitting(true);
-    console.log(values);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    setIsSubmitting(false);
+    try {
+      setIsSubmitting(true);
+      console.log(values);
+      // Simulate API call
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(true);
+        }, 3000);
+      });
+    } catch (error) {
+      console.error("Upload failed:", error);
+      // Surface error to form field if applicable, or generic error
+      form.setError("root", {
+        message: error instanceof Error ? error.message : "An unexpected error occurred during upload."
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -117,6 +130,13 @@ const UploadForm = () => {
               />
             )}
           />
+
+          {/* Form-level Error Message */}
+          {form.formState.errors.root && (
+            <p className="text-sm font-medium text-destructive">
+              {form.formState.errors.root.message}
+            </p>
+          )}
 
           {/* Submit Button */}
           <Button type="submit" className="form-btn" disabled={isSubmitting}>
